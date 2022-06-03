@@ -3,16 +3,24 @@
   <div class="normal">
     <span>Should be visible always</span>
   </div>
-  <div class="ff">
+  <div class="ff" v-if="test_ff">
     <span>Should be visible only when FF enabled!</span>
   </div>
 </template>
 
 <script>
+import {checkFeatureFlag} from "@/services/checkFeatureFlag";
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+  data() {
+    return {
+      test_ff: false
+    }
+  },
+  async mounted() {
+    console.log('test');
+    this.test_ff = await checkFeatureFlag('test_FF');
+    console.log(this.test_ff);
   }
 }
 </script>

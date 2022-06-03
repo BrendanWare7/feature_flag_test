@@ -2,15 +2,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors')
 
 let cache = require('./utils/cache');
-const {getFlags} = require("../utils/FeatureFlags");
+const {getFlags} = require("./utils/FeatureFlags");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 let featureFlagRouter = require('./routes/featureflags');
 
 var app = express();
+
+app.use(cors())
 
 cache.connect().then(async () => cache.set('feature_flags', await getFlags())).then(() => console.log('Done'));
 

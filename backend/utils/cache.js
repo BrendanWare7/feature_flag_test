@@ -4,7 +4,9 @@ let client;
 
 
 async function connect() {
-    client = createClient();
+    client = createClient({
+        url: 'redis://redis:6379'
+    });
 
     client.on('error', (err) => console.log('Redis Client Error', err));
 

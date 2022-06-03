@@ -3,10 +3,16 @@ services:
     build: frontend
     ports:
       - "3010:8080"
+    links:
+      - backend
   backend:
     build: backend
     ports:
       - "3011:8080"
+    volumes:
+      - "~/.aws:/root/.aws"
+    links:
+      - redis
   redis:
     image: redislabs/rejson
     ports:
