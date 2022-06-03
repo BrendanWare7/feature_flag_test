@@ -1,0 +1,13 @@
+services:
+  frontend:
+    build: frontend
+    ports:
+      - "3010:8080"
+  backend:
+    build: backend
+    ports:
+      - "3011:8080"
+  redis:
+    image: redislabs/rejson
+    ports:
+      - "6379:6379"
